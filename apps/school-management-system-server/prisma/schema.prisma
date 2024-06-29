@@ -1,0 +1,104 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Student {
+  classField    ClassModel? @relation(fields: [classFieldId], references: [id])
+  classFieldId  String?
+  createdAt     DateTime    @default(now())
+  dateOfBirth   DateTime?
+  email         String?
+  enrolmentYear Int?
+  id            String      @id @default(cuid())
+  name          String?
+  phone         String?
+  updatedAt     DateTime    @updatedAt
+}
+
+model Teacher {
+  createdAt DateTime @default(now())
+  email     String?
+  id        String   @id @default(cuid())
+  name      String?
+  phone     String?
+  subjects  String?
+  updatedAt DateTime @updatedAt
+}
+
+model Subject {
+  createdAt   DateTime @default(now())
+  id          String   @id @default(cuid())
+  subjectName String?
+  updatedAt   DateTime @updatedAt
+}
+
+model ClassModel {
+  className String?
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  students  Student[]
+  updatedAt DateTime  @updatedAt
+}
+
+model Course {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model CourseGrade {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model StudentClassEnrollment {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Grade {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model ClassTimetable {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model DigitalLibrary {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Attendance {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model CourseMaterial {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Message {
+  content   String?
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  receiver  String?
+  sender    String?
+  timestamp DateTime?
+  updatedAt DateTime  @updatedAt
+}
